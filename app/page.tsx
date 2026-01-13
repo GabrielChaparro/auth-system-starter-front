@@ -5,7 +5,10 @@ export default function Landing() {
     <div className="min-h-screen bg-[#F9FAFB] text-[#1F2937] font-sans">
       <header className="max-w-6xl mx-auto px-6 py-12">
         <nav className="flex items-center justify-between">
-          <div className="text-xl font-semibold tracking-tight">AuthKick</div>
+          <div className="flex items-center gap-2">
+            <img src="/logo.png" alt="AuthKick logo" className="h-8 w-auto" />
+            <span className="text-xl font-semibold tracking-tight">AuthKick</span>
+          </div>
           <button className="px-4 py-2 rounded-xl border border-[#E5E7EB] hover:bg-[#F3F4F6] transition shadow-sm">
             Contact
           </button>
