@@ -40,9 +40,12 @@ export default function Landing() {
               className="h-20 w-auto"
             />
           </div>
-          <button className="px-5 py-3 rounded-xl border border-[#E5E7EB] hover:bg-[#F3F4F6] transition shadow-sm text-base">
+          <a
+            href="mailto:gabrielcnhmx@gmail.com"
+            className="px-5 py-3 rounded-xl border border-[#E5E7EB] hover:bg-[#F3F4F6] transition shadow-sm text-base"
+          >
             Contact
-          </button>
+          </a>
         </nav>
       </header>
 
@@ -61,12 +64,19 @@ export default function Landing() {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <button className="px-7 py-4 rounded-xl bg-[#1F2937] text-white text-base font-medium hover:bg-[#111827] transition shadow-md">
+              <a
+                href="#pricing"
+                className="px-7 py-4 rounded-xl bg-[#1F2937] text-white text-base font-medium hover:bg-[#111827] transition shadow-md"
+              >
                 Get AuthKick
+              </a>
+              <button
+                disabled
+                className="px-7 py-4 rounded-xl border border-[#E5E7EB] text-base font-medium opacity-50 cursor-not-allowed"
+              >
+                View Demo (soon)
               </button>
-              <button className="px-7 py-4 rounded-xl border border-[#E5E7EB] text-base font-medium hover:bg-[#F3F4F6] transition shadow-md">
-                View Demo
-              </button>
+
             </div>
 
             {/* Proof points */}
@@ -157,7 +167,7 @@ curl -X POST http://localhost:8080/auth/login \\
         </section>
 
         {/* PRICING */}
-        <section className="mt-28">
+        <section id="pricing" className="mt-28">
           <h2 className="text-4xl font-bold mb-6 tracking-tight">Pricing</h2>
 
           <div className="grid md:grid-cols-2 gap-8">
