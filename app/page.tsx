@@ -190,9 +190,14 @@ curl -X POST http://localhost:8080/auth/login \\
                 <li>• Updates for 3 months</li>
               </ul>
 
-              <button className="w-full px-5 py-4 rounded-xl bg-[#1F2937] text-white text-base font-medium hover:bg-[#111827] transition shadow-md">
-                Buy License
+
+              <button
+                disabled
+                className="w-full px-5 py-4 rounded-xl bg-[#1F2937] text-white text-base font-medium opacity-50 cursor-not-allowed shadow-md"
+              >
+                Buy License (soon)
               </button>
+
             </div>
 
             <div className="p-9 rounded-3xl bg-white border border-[#E5E7EB] shadow-md hover:shadow-lg transition">
@@ -215,9 +220,12 @@ curl -X POST http://localhost:8080/auth/login \\
                 <li>• Security & flow guidance</li>
               </ul>
 
-              <button className="w-full px-5 py-4 rounded-xl border border-[#E5E7EB] text-base font-medium hover:bg-[#F3F4F6] transition shadow-md">
+              <a
+                href="mailto:gabrielcnhmx@gmail.com"
+                className="w-full inline-flex justify-center px-5 py-4 rounded-xl border border-[#E5E7EB] text-base font-medium hover:bg-[#F3F4F6] transition shadow-md"
+              >
                 Contact
-              </button>
+              </a>
             </div>
           </div>
         </section>
