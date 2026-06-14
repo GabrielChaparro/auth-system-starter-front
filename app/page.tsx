@@ -1,238 +1,271 @@
-import React from "react";
+const checkoutHref =
+  process.env.NEXT_PUBLIC_CHECKOUT_URL ||
+  "https://authkick.gumroad.com/l/rdgqkh";
+const contactEmail =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "gabrielcnhmx@gmail.com";
+const contactHref = `mailto:${contactEmail}?subject=AuthKick%20beta%20access`;
+
+const repoHref = "https://github.com/GabrielChaparro/auth-system-starter";
+
+const included = [
+  "Keycloak 24 + PostgreSQL in Docker Compose",
+  "Clean REST API wrapper built with Spring Boot 3 / Java 21",
+  "Login, refresh, revoke, logout, users, and roles",
+  "Admin-only authorization for management endpoints",
+  "OpenAPI contract, Swagger UI, and Postman collection",
+  "Realm templates generated from environment variables",
+];
+
+const apiRows = [
+  ["POST", "/auth/login", "Public"],
+  ["POST", "/auth/refresh", "Public"],
+  ["POST", "/auth/logout", "Public"],
+  ["POST", "/auth/update-password", "User JWT"],
+  ["POST", "/user/create", "Admin"],
+  ["POST", "/role/assign", "Admin"],
+];
+
+const comparison = [
+  ["Realm and client setup", "Manual config", "Env-driven template"],
+  ["Token flows", "Wire every call", "REST wrapper included"],
+  ["Docs", "Write after building", "OpenAPI + Postman ready"],
+  ["Security baseline", "Easy to forget", "Admin rules included"],
+];
 
 export default function Landing() {
-  const features = [
-    {
-      title: "Instant Setup",
-      desc: "Dockerized Keycloak backend with REST-ready Java endpoints. Up and running in minutes.",
-    },
-    {
-      title: "Battle-Tested Auth",
-      desc: "Password, token, refresh, roles, and password reset all ready to go — no more boilerplate.",
-    },
-    {
-      title: "Own Your Stack",
-      desc: "Self-hosted Keycloak, full control, zero third-party vendor lock-in.",
-    },
-  ];
-
-  const apis = [
-    { method: "POST", path: "/auth/login", desc: "Log in and receive tokens" },
-    { method: "POST", path: "/auth/refresh", desc: "Refresh access token" },
-    { method: "POST", path: "/auth/revoke", desc: "Revoke access/refresh token" },
-    { method: "POST", path: "/auth/logout", desc: "Logout user session" },
-    { method: "POST", path: "/auth/reset-password", desc: "Admin resets user password" },
-    { method: "POST", path: "/auth/update-password", desc: "User updates own password" },
-    { method: "POST", path: "/user/create", desc: "Create a new user" },
-    { method: "POST", path: "/user/update", desc: "Update user fields" },
-    { method: "POST", path: "/role/assign", desc: "Assign a role to a user" },
-  ];
-
   return (
-    <div className="min-h-screen bg-[#F9FAFB] text-[#1F2937] font-sans">
-      <header className="max-w-7xl mx-auto px-6 py-10">
-        <nav className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {/* Use the PNG for better quality */}
-            <img
-              src="/logo.png"
-              alt="AuthKick logo"
-              className="h-20 w-auto"
-            />
-          </div>
-          <a
-            href="mailto:gabrielcnhmx@gmail.com"
-            className="px-5 py-3 rounded-xl border border-[#E5E7EB] hover:bg-[#F3F4F6] transition shadow-sm text-base"
-          >
-            Contact
+    <div className="min-h-screen bg-[#f5f7fb] text-[#111827]">
+      <header className="fixed inset-x-0 top-0 z-20 border-b border-white/10 bg-[#09111f]/88 backdrop-blur">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
+          <a href="#" className="text-xl font-bold tracking-tight text-white">
+            AuthKick
           </a>
+          <div className="flex items-center gap-2 text-sm">
+            <a
+              href="#included"
+              className="hidden rounded-md px-3 py-2 font-medium text-[#dbeafe] hover:bg-white/10 sm:inline"
+            >
+              Included
+            </a>
+            <a
+              href={checkoutHref}
+              className="rounded-md bg-[#2dd4bf] px-4 py-2 font-semibold text-[#07111f] hover:bg-[#5eead4]"
+            >
+              Buy beta
+            </a>
+          </div>
         </nav>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-24">
-        {/* HERO */}
-        <section className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
-            <h1 className="text-6xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
-              Auth in minutes. Powered by Keycloak.
-            </h1>
-
-            <p className="text-[#4B5563] max-w-2xl mx-auto lg:mx-0 text-xl mb-10">
-              AuthKick simplifies Keycloak integration with a production-ready
-              Java + Docker starter. Secure authentication without the config
-              nightmare.
-            </p>
-
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <a
-                href="#pricing"
-                className="px-7 py-4 rounded-xl bg-[#1F2937] text-white text-base font-medium hover:bg-[#111827] transition shadow-md"
-              >
-                Get AuthKick
-              </a>
-              <button
-                disabled
-                className="px-7 py-4 rounded-xl border border-[#E5E7EB] text-base font-medium opacity-50 cursor-not-allowed"
-              >
-                View Demo (soon)
-              </button>
-
-            </div>
-
-            {/* Proof points */}
-            <div className="mt-8 flex flex-wrap gap-2 justify-center lg:justify-start">
-              {["Self-hosted", "OIDC / OAuth2", "Docker-ready", "Java REST API"].map(
-                (tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-sm rounded-full bg-white border border-[#E5E7EB] text-[#374151] shadow-sm"
-                  >
-                    {tag}
-                  </span>
-                )
-              )}
-            </div>
+      <main>
+        <section className="relative min-h-[92vh] overflow-hidden bg-[#09111f] pt-28 text-white">
+          <div className="absolute inset-0 opacity-65">
+            <div className="absolute left-1/2 top-24 h-[620px] w-[920px] -translate-x-1/2 rounded-full bg-[#123b68] blur-3xl" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:72px_72px]" />
           </div>
 
-          {/* Visual / Code card */}
-          <div className="bg-white border border-[#E5E7EB] rounded-3xl shadow-md p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold tracking-tight">
-                Start in minutes
-              </h3>
-              <span className="text-xs text-[#6B7280]">docker</span>
-            </div>
-
-            <pre className="text-sm leading-relaxed overflow-x-auto rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB] p-4 font-mono">
-{`# 1) Run Keycloak + AuthKick
-docker compose up -d
-
-# 2) Login (example)
-curl -X POST http://localhost:8080/auth/login \\
-  -H "Content-Type: application/json" \\
-  -d '{"username":"demo","password":"demo"}'`}
-            </pre>
-
-            <p className="text-xs text-[#6B7280] mt-3">
-              Production-ready starter: Keycloak + Java REST endpoints + Docker.
-            </p>
-          </div>
-        </section>
-
-        {/* FEATURES */}
-        <section className="grid md:grid-cols-3 gap-8 mt-24">
-          {features.map((item, i) => (
-            <div
-              key={i}
-              className="p-7 rounded-3xl bg-white border border-[#E5E7EB] shadow-md hover:shadow-lg transition"
-            >
-              <h3 className="text-xl font-semibold mb-2 leading-snug tracking-tight">
-                {item.title}
-              </h3>
-              <p className="text-[#4B5563] text-base leading-relaxed">
-                {item.desc}
+          <div className="relative mx-auto grid max-w-7xl gap-10 px-5 pb-16 lg:grid-cols-[1fr_0.9fr] lg:items-end">
+            <div className="max-w-4xl pb-8">
+              <p className="mb-5 inline-flex rounded-md border border-[#2dd4bf]/35 bg-[#2dd4bf]/10 px-3 py-1 text-sm font-semibold text-[#99f6e4]">
+                Self-hosted auth API powered by Keycloak
               </p>
-            </div>
-          ))}
-        </section>
+              <h1 className="text-5xl font-bold leading-[1.02] md:text-7xl">
+                Ship Keycloak auth without losing a week to setup.
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#cbd5e1]">
+                AuthKick packages Keycloak, PostgreSQL, Docker, REST endpoints,
+                OpenAPI, and Postman into one starter. Consume it from any web,
+                mobile, backend, SaaS, or internal tool.
+              </p>
 
-        {/* API */}
-        <section className="mt-24 text-left">
-          <h2 className="text-4xl font-bold mb-4 tracking-tight leading-tight">
-            Available API Methods
-          </h2>
-          <p className="text-[#4B5563] text-base mb-8 max-w-3xl">
-            AuthKick includes a clean REST API built in Java, backed by Keycloak,
-            to handle every key auth flow.
-          </p>
-
-          <div className="space-y-4">
-            {apis.map((api) => (
-              <div
-                key={api.path}
-                className="border border-[#E5E7EB] bg-white rounded-2xl p-5 shadow-md hover:shadow-lg transition"
-              >
-                <div className="flex items-center gap-4 flex-wrap">
-                  <span className="px-2 py-1 text-xs font-medium bg-[#1F2937] text-white rounded">
-                    {api.method}
-                  </span>
-                  <code className="text-base font-mono bg-[#F9FAFB] border border-[#E5E7EB] px-2 py-1 rounded">
-                    {api.path}
-                  </code>
-                </div>
-                <p className="text-sm text-[#6B7280] mt-2">{api.desc}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={checkoutHref}
+                  className="rounded-md bg-[#2dd4bf] px-6 py-3 text-center font-bold text-[#07111f] hover:bg-[#5eead4]"
+                >
+                  Buy beta access
+                </a>
+                <a
+                  href={repoHref}
+                  className="rounded-md border border-white/20 px-6 py-3 text-center font-semibold text-white hover:bg-white/10"
+                >
+                  View GitHub
+                </a>
               </div>
-            ))}
+
+              <div className="mt-8 grid max-w-2xl grid-cols-2 gap-3 text-sm text-[#cbd5e1] sm:grid-cols-4">
+                {["Docker", "OIDC", "Java 21", "OpenAPI"].map((item) => (
+                  <span key={item} className="rounded-md border border-white/12 bg-white/6 px-3 py-2">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative min-h-[360px] overflow-hidden rounded-lg border border-white/12 bg-[#050a13] shadow-2xl shadow-black/40">
+              <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+                <span className="h-3 w-3 rounded-full bg-[#ef4444]" />
+                <span className="h-3 w-3 rounded-full bg-[#f59e0b]" />
+                <span className="h-3 w-3 rounded-full bg-[#22c55e]" />
+                <span className="ml-3 text-xs font-medium text-[#94a3b8]">authkick quickstart</span>
+              </div>
+              <pre className="overflow-x-auto p-5 text-sm leading-7 text-[#dbeafe]">
+{`$ make setup
+[OK] Realm export generated
+
+$ make start
+✔ postgres-keycloak running
+✔ keycloak running
+✔ auth-api running
+
+Swagger UI
+http://localhost:8081/swagger-ui/index.html
+
+POST /auth/login
+POST /auth/refresh
+POST /user/create   # admin role`}
+              </pre>
+            </div>
           </div>
         </section>
 
-        {/* PRICING */}
-        <section id="pricing" className="mt-28">
-          <h2 className="text-4xl font-bold mb-6 tracking-tight">Pricing</h2>
+        <section id="included" className="border-b border-[#d8dee9] bg-white">
+          <div className="mx-auto max-w-7xl px-5 py-16">
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight">What the beta includes</h2>
+                <p className="mt-4 max-w-md leading-7 text-[#4b5563]">
+                  A practical starter, not a tutorial. Clone it, configure the
+                  environment, and start integrating the flows your app needs.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {included.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-lg border border-[#d8dee9] bg-[#f8fafc] p-4 text-sm font-medium text-[#1f2937]"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="p-9 rounded-3xl bg-white border border-[#E5E7EB] shadow-md hover:shadow-lg transition">
-              <h3 className="text-2xl font-semibold mb-2">
-                AuthKick Developer License
-              </h3>
-              <p className="text-[#4B5563] mb-4 text-base leading-relaxed">
-                For devs and indie teams who want to integrate secure auth in minutes.
+        <section className="mx-auto max-w-7xl px-5 py-16">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight">Small API surface, Keycloak underneath</h2>
+              <p className="mt-4 leading-7 text-[#4b5563]">
+                Your application talks to a focused REST layer. Keycloak remains
+                the identity provider and source of truth for users, clients,
+                tokens, and roles.
               </p>
-
-              <p className="text-4xl font-bold mb-6">
-                $49 <span className="text-base font-normal text-[#6B7280]">one-time</span>
-              </p>
-
-              <ul className="text-base text-[#374151] space-y-2 mb-6">
-                <li>• Access to the private repo</li>
-                <li>• Production-ready wrapper</li>
-                <li>• Example implementation</li>
-                <li>• Updates for 3 months</li>
-              </ul>
-
-
-              <button
-                disabled
-                className="w-full px-5 py-4 rounded-xl bg-[#1F2937] text-white text-base font-medium opacity-50 cursor-not-allowed shadow-md"
-              >
-                Buy License (soon)
-              </button>
-
             </div>
 
-            <div className="p-9 rounded-3xl bg-white border border-[#E5E7EB] shadow-md hover:shadow-lg transition">
-              <h3 className="text-2xl font-semibold mb-2">
-                Custom Support & Integration
-              </h3>
-              <p className="text-[#4B5563] mb-4 text-base leading-relaxed">
-                For teams needing hands-on support or advanced Keycloak configuration.
-              </p>
+            <div className="overflow-hidden rounded-lg border border-[#d8dee9] bg-white">
+              {apiRows.map(([method, path, access]) => (
+                <div
+                  key={path}
+                  className="grid grid-cols-[68px_1fr_82px] items-center gap-3 border-b border-[#eef2f7] px-4 py-3 last:border-b-0"
+                >
+                  <span className="rounded bg-[#111827] px-2 py-1 text-center text-xs font-bold text-white">
+                    {method}
+                  </span>
+                  <code className="overflow-x-auto whitespace-nowrap text-sm text-[#1f2937]">
+                    {path}
+                  </code>
+                  <span className="text-right text-xs font-semibold text-[#64748b]">
+                    {access}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-              {/* Fixed wording: avoid “per month / hr” */}
-              <p className="text-4xl font-bold mb-6">
-                From $19 <span className="text-base font-normal text-[#6B7280]">/ hour</span>
-              </p>
+        <section className="border-y border-[#d8dee9] bg-[#eef4fb]">
+          <div className="mx-auto max-w-7xl px-5 py-16">
+            <h2 className="max-w-2xl text-3xl font-bold tracking-tight">
+              Built for the part of auth that teams keep rebuilding.
+            </h2>
+            <div className="mt-8 overflow-hidden rounded-lg border border-[#cbd5e1] bg-white">
+              <div className="grid grid-cols-[1fr_1fr_1fr] bg-[#111827] px-4 py-3 text-sm font-semibold text-white">
+                <span>Workstream</span>
+                <span>From scratch</span>
+                <span>With AuthKick</span>
+              </div>
+              {comparison.map(([area, manual, authkick]) => (
+                <div
+                  key={area}
+                  className="grid grid-cols-[1fr_1fr_1fr] gap-4 border-b border-[#eef2f7] px-4 py-4 text-sm last:border-b-0"
+                >
+                  <span className="font-semibold text-[#1f2937]">{area}</span>
+                  <span className="text-[#64748b]">{manual}</span>
+                  <span className="font-medium text-[#0f766e]">{authkick}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-              <ul className="text-base text-[#374151] space-y-2 mb-6">
-                <li>• Email support</li>
-                <li>• Integration assistance</li>
-                <li>• Advanced Keycloak configuration</li>
-                <li>• Security & flow guidance</li>
-              </ul>
+        <section id="pricing" className="mx-auto max-w-7xl px-5 py-16">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.12em] text-[#0f766e]">
+                Early access
+              </p>
+              <h2 className="mt-3 text-4xl font-bold tracking-tight">
+                Start with the beta. Harden with the roadmap.
+              </h2>
+              <p className="mt-4 max-w-xl leading-7 text-[#4b5563]">
+                The beta is priced for builders who want the starter now and are
+                comfortable giving feedback while examples and deployment guides
+                are expanded.
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-[#d8dee9] bg-white p-6 shadow-sm">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold">Developer License</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#64748b]">
+                    Downloadable package, 3 months of updates, and direct beta
+                    feedback.
+                  </p>
+                </div>
+                <div className="text-left sm:text-right">
+                  <p className="text-5xl font-bold">$49</p>
+                  <p className="text-sm text-[#64748b]">one-time beta price</p>
+                </div>
+              </div>
+
+              <div className="mt-6 grid gap-3 text-sm text-[#1f2937] sm:grid-cols-2">
+                <span>Commercial project use</span>
+                <span>OpenAPI and Postman</span>
+                <span>Docker local stack</span>
+                <span>Security baseline tests</span>
+              </div>
 
               <a
-                href="mailto:gabrielcnhmx@gmail.com"
-                className="w-full inline-flex justify-center px-5 py-4 rounded-xl border border-[#E5E7EB] text-base font-medium hover:bg-[#F3F4F6] transition shadow-md"
+                href={checkoutHref}
+                className="mt-6 block rounded-md bg-[#111827] px-5 py-3 text-center font-bold text-white hover:bg-[#253041]"
               >
-                Contact
+                Buy on Gumroad
               </a>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="max-w-7xl mx-auto px-6 py-12 text-sm text-[#6B7280]">
-        Built by Gabriel Chaparro — AuthKick
+      <footer className="border-t border-[#d8dee9] bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-8 text-sm text-[#64748b] sm:flex-row sm:items-center sm:justify-between">
+          <span>AuthKick by Gabriel Chaparro</span>
+          <a href={contactHref} className="font-semibold text-[#111827] hover:underline">
+            {contactEmail}
+          </a>
+        </div>
       </footer>
     </div>
   );

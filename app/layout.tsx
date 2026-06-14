@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "AuthKick",
-  description: "Secure your access.",
+  title: "AuthKick - Self-hosted Auth API with Keycloak",
+  description:
+    "A ready-to-run self-hosted authentication API powered by Keycloak, Docker, PostgreSQL, OpenAPI, and Postman.",
 };
 
 export default function RootLayout({
@@ -24,11 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
